@@ -1,0 +1,35 @@
+.pages {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+.page, .page-active {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #64B0DC;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  border-radius: 50%;
+  transition: .3s all;
+  color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+}
+
+.page-active {
+  background-color: #fff;
+  border: 1px solid #64B0DC;
+  color: #64B0DC;
+}
+
+.page:hover {
+  background-color: #dfdfdf;
+  color: #64B0DC;
+}
