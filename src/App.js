@@ -37,7 +37,7 @@ function App () {
     <div className="container">
       <div className="title">我的文章</div>
       <Articles articles={articles} loading={loading}></Articles>
-      <Paginations page={page} pageCount={pageCount} goto={gotoPage}></Paginations>
+      <Paginations page={page} pageCount={pageCount} hidden={loading} goto={gotoPage}></Paginations>
     </div>
   )
 }

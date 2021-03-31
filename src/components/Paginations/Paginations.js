@@ -1,7 +1,9 @@
 import React from 'react'
 import './Paginations.css'
 
-const Paginations = ({ page, pageCount, goto }) => {
+const Paginations = ({ page, pageCount, hidden, goto }) => {
+  if (hidden) return null
+
   let pageIndexs = []
   for (let i = 0; i < pageCount; i++) {
     pageIndexs.push(i + 1)
@@ -16,19 +18,19 @@ const Paginations = ({ page, pageCount, goto }) => {
       pageIndexs = [...pageIndexs.slice(0, 1), '...', ...pageIndexs.slice(page - 2, page + 1), '...', ...pageIndexs.slice(-1)]
     }
   }
-  
+
   return (
     <ul className="pages">
       <li className="page" onClick={() => goto(page - 1)}>&lt;</li>
       {
         pageIndexs.map((pageIndex, index) => (
-          <li 
-            key={index} 
+          <li
+            key={index}
             className={
-              pageIndex === '...' 
+              pageIndex === '...'
                 ? ''
-                : pageIndex === page 
-                  ? 'page-active' 
+                : pageIndex === page
+                  ? 'page-active'
                   : 'page'
             }
             onClick={() => goto(pageIndex)}

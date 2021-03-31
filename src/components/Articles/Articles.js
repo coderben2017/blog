@@ -5,7 +5,7 @@ const Articles = ({ articles, loading }) => {
   if (loading) {
     return (
       <div className="loading">
-        加载中，请稍后
+        加载中，请稍候...
       </div>
     )
   }
