@@ -1,0 +1,13 @@
+.container-404 {
+  padding-top: 50px;
+  text-align: center;
+  font-style: italic;
+  font-size: 24px;
+}
+
+.btn-large {
+  display: block;
+  width: 60%;
+  height: 40px;
+  margin: 30px auto;
+}

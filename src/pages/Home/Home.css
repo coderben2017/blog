@@ -9,3 +9,14 @@
   line-height: 50px;
   text-indent: 20px;
 }
+
+
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+  }
+}
