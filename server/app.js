@@ -9,8 +9,8 @@ const ip = getLocalIP()
 const port = 3001
 
 // 数据源，简单模拟一个数据库
-const total = 789
-const articles = []
+let total = 789
+let articles = []
 for (let i = 0; i < total; i++) {
   const mockArticle = Mock.mock({
     id: String(i + 1),
@@ -38,8 +38,8 @@ app.all('*', function (req, res, next) {
 
 app.get('/articles', (req, res) => {
   let { start, limit } = req.query
-  start = Number(start)
-  limit = Number(limit)
+  start = Number(start) || 0
+  limit = Number(limit) || (articles.length - 1)
   const data = articles.slice(start, start + limit)
   res.json({
     data,
@@ -59,7 +59,7 @@ app.post('/article', (req, res) => {
   let { id, title, content, author, createTime } = req.body
   if (!id) id = +new Date() + Math.random() + ''
   articles.unshift({id, title, content, author, createTime})
-  ++total;
+  ++total
   res.json({
     data: {id, title, content, author, createTime}
   })
@@ -67,5 +67,5 @@ app.post('/article', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`blog server start on https://${ip}:${port}`)
+  console.log(`blog server start on http://${ip}:${port}`)
 })
