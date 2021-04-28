@@ -1,5 +1,6 @@
 const express = require('express')
 const Mock = require('mockjs')
+const bodyParser = require('body-parser')
 const { getLocalIP } = require('./utils')
 
 const app = express()
@@ -21,6 +22,10 @@ for (let i = 0; i < total; i++) {
   articles.push(mockArticle)
 }
 
+// post body解析
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
 // 跨域配置
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -30,12 +35,12 @@ app.all('*', function (req, res, next) {
   next();
 });
 
+
 app.get('/articles', (req, res) => {
   let { start, limit } = req.query
   start = Number(start)
   limit = Number(limit)
   const data = articles.slice(start, start + limit)
-  console.log({ data, total })
   res.json({
     data,
     total
@@ -47,9 +52,19 @@ app.get('/article', (req, res) => {
   const data = articles.find(article => article.id === id)
   res.json({
     data,
-    total
   })
 })
+
+app.post('/article', (req, res) => {
+  let { id, title, content, author, createTime } = req.body
+  if (!id) id = +new Date() + Math.random() + ''
+  articles.unshift({id, title, content, author, createTime})
+  ++total;
+  res.json({
+    data: {id, title, content, author, createTime}
+  })
+})
+
 
 app.listen(port, () => {
   console.log(`blog server start on https://${ip}:${port}`)
