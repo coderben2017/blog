@@ -7,8 +7,9 @@ const getLocalIP = function () {
   try {
     switch(osType) {
       case 'Windows_NT':
+	    console.log(netInfo)
         for (let dev in netInfo) {
-          if (dev === '本地连接' || dev === '以太网') { //win7的网络信息中显示为本地连接，win10显示为以太网
+          if (dev === '本地连接' || dev.includes('以太网')) { //win7的网络信息中显示为本地连接，win10显示为以太网
             for (let i = 0; i < netInfo[dev].length; i++) {
               if (netInfo[dev][i].family === 'IPv4') {
                 return netInfo[dev][i].address;
